@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.project.taskflow.enums.TaskStatus;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -20,12 +21,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "task")
+@Table(name = "tasks")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Task extends BaseEntity{
+public class Task extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -36,7 +37,8 @@ public class Task extends BaseEntity{
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private TaskStatus taskStatus;
+    @Column(name = "status")
+    private TaskStatus status;
 
     private String priority;
 
