@@ -3,9 +3,9 @@ package com.project.taskflow.entity;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import com.project.taskflow.enums.Priority;
 import com.project.taskflow.enums.TaskStatus;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +27,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Task extends BaseEntity {
 
     @Id
@@ -37,12 +39,16 @@ public class Task extends BaseEntity {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
     private TaskStatus status;
 
-    private String priority;
+    @Enumerated(EnumType.STRING)
+    private Priority priority;
 
     private LocalDate dueDate;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project assignedProject;
 
     @ManyToOne
     @JoinColumn(name = "assigned_to")

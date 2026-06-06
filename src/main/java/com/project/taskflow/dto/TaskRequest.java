@@ -1,5 +1,10 @@
 package com.project.taskflow.dto;
 
+import java.time.LocalDate;
+import java.util.UUID;
+
+import com.project.taskflow.enums.Priority;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,5 +18,9 @@ public class TaskRequest {
 
     private String description;
 
-    private String priority;
+    private Priority priority;
+
+    private LocalDate dueDate;
+
+    private UUID projectId;
 }
